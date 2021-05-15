@@ -1,0 +1,22 @@
+#!/bin/env python
+
+from ROOT import TH1D
+from RatioPlot import RatioPlot
+
+print('--- Testing PyThrow ---')
+
+hist = TH1D('hist', '', 10, 0., 10.)
+
+hist.SetBinContent(1, 2)
+hist.SetBinContent(2, 3)
+hist.SetBinContent(3, 4)
+hist.SetBinContent(4, 1)
+hist.SetBinContent(5, 2)
+hist.SetBinContent(6, 3)
+
+rp = RatioPlot('test')
+
+rp.add_hist(hist)
+rp.add_ratio_hist(hist)
+
+rp.draw()
