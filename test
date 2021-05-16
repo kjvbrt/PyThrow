@@ -1,22 +1,52 @@
 #!/bin/env python
 
-from ROOT import TH1D
-from RatioPlot import RatioPlot
+def main():
+    from ROOT import gROOT, TH1D
+    from RatioPlot import RatioPlot
 
-print('--- Testing PyThrow ---')
+    gROOT.SetBatch(True)
 
-hist = TH1D('hist', '', 10, 0., 10.)
+    print('--- Testing PyThrow ---')
 
-hist.SetBinContent(1, 2)
-hist.SetBinContent(2, 3)
-hist.SetBinContent(3, 4)
-hist.SetBinContent(4, 1)
-hist.SetBinContent(5, 2)
-hist.SetBinContent(6, 3)
+    hist1 = TH1D('hist1', '', 10, 0., 10.)
+    hist2 = TH1D('hist2', '', 10, 0., 10.)
 
-rp = RatioPlot('test')
+    hist1.SetBinContent(1, 2)
+    hist1.SetBinContent(2, 3)
+    hist1.SetBinContent(3, 4)
+    hist1.SetBinContent(4, 1)
+    hist1.SetBinContent(5, 2)
+    hist1.SetBinContent(6, 3)
+    hist1.SetBinContent(7, 4)
+    hist1.SetBinContent(8, 5)
+    hist1.SetBinContent(9, 3)
+    hist1.SetBinContent(10, 1)
 
-rp.add_hist(hist)
-rp.add_ratio_hist(hist)
+    hist2.SetBinContent(1, 4)
+    hist2.SetBinContent(2, 2)
+    hist2.SetBinContent(3, 3)
+    hist2.SetBinContent(4, 2)
+    hist2.SetBinContent(5, 1)
+    hist2.SetBinContent(6, 4)
+    hist2.SetBinContent(7, 3)
+    hist2.SetBinContent(8, 2)
+    hist2.SetBinContent(9, 5)
+    hist2.SetBinContent(10, 2)
 
-rp.draw()
+    hist1.SetTitle('No cut;p_{T} [GeV];N_{evt}')
+    hist2.SetTitle('Cut;p_{T} [GeV];N_{evt}')
+
+    rp = RatioPlot('output/test')
+
+    rp.add_hist(hist1)
+    rp.add_hist(hist2)
+    rp.make_ratio(hist1, hist2)
+    rp.set_ratio_label('Cut / No cut')
+    rp.set_y_max(10)
+    rp.add_note('#sqrt{s} = 13 TeV')
+
+    rp.draw()
+
+
+if __name__ == '__main__':
+    main()
