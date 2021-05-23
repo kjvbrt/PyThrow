@@ -18,7 +18,7 @@ class RatioPlot:
 
         self.legend = TLegend(.6, .6, .95, .95)
         self.legend.SetFillStyle(0)
-        self.legend.SetBorderSize(1)
+        self.legend.SetBorderSize(0)
         self.legend.SetTextFont(43)
         self.legend.SetTextSize(12)
 
@@ -112,6 +112,8 @@ class RatioPlot:
 
     def set_x_range(self, x_min: int, x_max: int) -> None:
         for obj in self.objects:
+            obj.GetXaxis().SetRangeUser(x_min, x_max)
+        for obj in self.ratio_objects:
             obj.GetXaxis().SetRangeUser(x_min, x_max)
 
     def set_y_min(self, y_min: int) -> None:

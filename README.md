@@ -1,3 +1,3 @@
 # PyThrow
 
-Small PyROOT library
+PyROOT convenience library
