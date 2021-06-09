@@ -2,7 +2,7 @@
 
 def main():
     from ROOT import gROOT, TH1D
-    from RatioPlot import RatioPlot
+    from PyThrow import RatioPlot
 
     gROOT.SetBatch(True)
 

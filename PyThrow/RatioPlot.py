@@ -1,4 +1,4 @@
-from Utils import random_string, create_dir, make_ratio
+from .Utils import random_string, create_dir, make_ratio
 
 
 class RatioPlot:
