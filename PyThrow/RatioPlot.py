@@ -24,7 +24,10 @@ class RatioPlot:
 
         self.plot_name = plot_name
 
-    def add_hist(self, inhist, draw_option='PE') -> None:
+    def add_hist(self,
+                 inhist,
+                 draw_option: str = 'PE',
+                 draw_function: bool = False) -> None:
         from ROOT import TF1
 
         hist = inhist.Clone(inhist.GetName() + '_' + random_string())
@@ -58,8 +61,9 @@ class RatioPlot:
         self.legend.AddEntry(hist, hist.GetTitle(), hist.DrawOption + 'L')
         hist.SetTitle('')
 
-        for func in hist.GetListOfFunctions():
-            func.SetBit(TF1.kNotDraw)
+        if draw_function:
+            for func in hist.GetListOfFunctions():
+                func.SetBit(TF1.kNotDraw)
 
         self.objects.append(hist)
 
